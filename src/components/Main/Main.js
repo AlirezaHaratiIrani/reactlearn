@@ -3,10 +3,14 @@ import React from "react";
 const Main = (props) => {
   React.useEffect(() => {
     console.log("Main.js UseEffect");
-    setTimeout(() => {
-      alert("HTTP request")
-    }, 2000);
-  }, []);
+    // setTimeout(() => {
+    //   alert("HTTP request");
+    // }, 2000);
+
+    return () => {
+      console.log("Main.js cleanup");
+    };
+  }, [props.products]);
 
   const btn = {
     backgroundColor: "#7b1fa2",

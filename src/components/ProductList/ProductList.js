@@ -16,6 +16,11 @@ class ProductList extends React.Component {
     console.log("ProductList componentDidUpdate");
   }
 
+  componentWillUnmount() {
+    console.log("ProductList componentWillUnmount");
+  }
+
+
   render() {
     console.log("ProductList Render");
 

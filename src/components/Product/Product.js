@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import "./Product.css";
-
+import  Container  from "../../hoc/Container";
 class Product extends Component {
   render() {
     console.log("Product Render");
 
     return (
-      <div className="product">
+      <Container>
         <p>Product Name: {this.props.title}</p>
         <p onClick={this.props.click}>Product Price: {this.props.price}</p>
         <p>{this.props.children}</p>
         <input type="text" onChange={(e) => this.props.change(e, this.props.id)} />
         <button onClick={this.props.delete}>Del</button>
-      </div>
+      </Container>
     );
   }
 }

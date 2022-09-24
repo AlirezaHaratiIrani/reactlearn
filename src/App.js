@@ -2,6 +2,7 @@ import React from "react";
 import ProductList from "./components/ProductList/ProductList";
 import "./App.css";
 import Main from "./components/Main/Main";
+import Wrapper from "./hoc/Wrapper";
 
 class App extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends React.Component {
       },
     ],
     showProducts: false,
+    showMain: true,
   };
 
   changePriceHandler = () => {
@@ -64,7 +66,6 @@ class App extends React.Component {
   componentDidUpdate() {
     console.log("App.js componentDidUpdate");
   }
-
   changeTitleHandler = (event, id) => {
     const products = [...this.state.products];
     const idx = products.findIndex((item) => item.id == id);
@@ -110,10 +111,22 @@ class App extends React.Component {
     }
 
     return (
-      <div className="center">
-        <Main click={this.toggleProductHandler} />
+      <Wrapper center="center">
+        <button
+          onClick={() => {
+            this.setState({ showMain: false });
+          }}
+        >
+          Remove
+        </button>
+        {this.state.showMain ? (
+          <Main
+            products={this.state.products}
+            click={this.toggleProductHandler}
+          />
+        ) : null}
         {products}
-      </div>
+      </Wrapper>
     );
   }
 }
