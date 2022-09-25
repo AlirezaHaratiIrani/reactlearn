@@ -2,6 +2,7 @@ import React from "react";
 import ProductList from "./components/ProductList/ProductList";
 import "./App.css";
 import Main from "./components/Main/Main";
+import Container from "./hoc/Container";
 import Wrapper from "./hoc/Wrapper";
 
 class App extends React.Component {
@@ -111,7 +112,7 @@ class App extends React.Component {
     }
 
     return (
-      <Wrapper center="center">
+      <Container>
         <button
           onClick={() => {
             this.setState({ showMain: false });
@@ -126,7 +127,7 @@ class App extends React.Component {
           />
         ) : null}
         {products}
-      </Wrapper>
+      </Container>
     );
   }
 }
@@ -181,4 +182,5 @@ class App extends React.Component {
   );
 };*/
 
-export default App;
+// export default App;
+export default Wrapper(App, "center");
