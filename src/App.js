@@ -4,6 +4,7 @@ import "./App.css";
 import Main from "./components/Main/Main";
 import Container from "./hoc/Container";
 import Wrapper from "./hoc/Wrapper";
+import AuthContext from "./context/auth-context";
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
     ],
     showProducts: false,
     showMain: true,
+    auth: false,
   };
 
   changePriceHandler = () => {
@@ -94,6 +96,10 @@ class App extends React.Component {
     }
   };
 
+  loginHandler = () => {
+    this.setState({ auth: true });
+  };
+
   render() {
     console.log("App.js Render");
 
@@ -102,6 +108,7 @@ class App extends React.Component {
       products = (
         <div>
           <ProductList
+            isAuth={this.state.auth}
             products={this.state.products}
             delete={this.deleteProductHandler}
             click={this.changePriceHandler}
@@ -120,13 +127,18 @@ class App extends React.Component {
         >
           Remove
         </button>
-        {this.state.showMain ? (
-          <Main
-            products={this.state.products}
-            click={this.toggleProductHandler}
-          />
-        ) : null}
-        {products}
+        <AuthContext.Provider
+          value={{ auth: this.state.auth, login: this.loginHandler }}
+        >
+          {this.state.showMain ? (
+            <Main
+              login={this.loginHandler}
+              products={this.state.products}
+              click={this.toggleProductHandler}
+            />
+          ) : null}
+          {products}
+        </AuthContext.Provider>
       </Container>
     );
   }
